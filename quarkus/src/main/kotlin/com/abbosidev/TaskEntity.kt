@@ -4,8 +4,6 @@ import io.quarkus.hibernate.orm.panache.kotlin.PanacheCompanion
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import java.text.DateFormat
-import java.time.Instant
 import java.util.Date
 
 @Entity(name = "Task")
