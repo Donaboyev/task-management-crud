@@ -1,7 +1,6 @@
 package com.abbosidev
 
 import java.time.LocalDate
-import java.util.Date
 
 data class TaskDto(
     val title: String,

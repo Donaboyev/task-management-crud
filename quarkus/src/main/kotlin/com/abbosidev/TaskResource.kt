@@ -18,7 +18,7 @@ class TaskResource(private val taskService: TaskService) {
     fun getAllTasks() = taskService.getAllTasks()
 
     @POST
-    fun saveNewTask(task: TaskDto) = taskService.save(task)
+    fun saveNewTask(task: TaskDto): TaskEntity = taskService.save(task)
 
     @GET
     @Path("/{id}")
@@ -27,11 +27,9 @@ class TaskResource(private val taskService: TaskService) {
 
     @PUT
     @Path("/{id}")
-    fun updateTask(@PathParam("id") id: Long, task: TaskDto) {
-        val updated = taskService.updateTask(id, task)
-        if (updated < 1) {
-            throw EntityNotFoundException("Task with $id id does not exist")
-        }
+    fun updateTask(@PathParam("id") id: Long, task: TaskDto): TaskEntity {
+        return taskService.updateTask(id, task)
+            ?: throw EntityNotFoundException("Task with $id id does not exist")
     }
 
     @DELETE

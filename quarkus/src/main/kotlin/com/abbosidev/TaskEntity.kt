@@ -12,22 +12,29 @@ class TaskEntity : PanacheEntity() {
     companion object : PanacheCompanion<TaskEntity> {
         fun getAllTasks() = listAll()
 
-        fun save(task: TaskDto) = persist(TaskEntity().apply {
-            title = task.title
-            type = task.type
-            dueDate = task.dueDate
-            description = task.description
-        })
+        fun save(task: TaskDto): TaskEntity {
+            val entity = TaskEntity().apply {
+                title = task.title
+                type = task.type
+                dueDate = task.dueDate
+                description = task.description
+            }
+            entity.persist()
+            return entity
+        }
 
-        fun updateTask(id: Long, task: TaskDto) = update(
-            """
+        fun updateTask(id: Long, task: TaskDto): TaskEntity? {
+            update(
+                """
                 title = ?1, 
                 type = ?2, 
                 dueDate = ?3, 
                 description = ?4 
                 WHERE id = ?5
             """.trimIndent(), task.title, task.type, task.dueDate, task.description, id
-        )
+            )
+            return findById(id)
+        }
     }
 
     lateinit var title: String
