@@ -43,4 +43,8 @@ class TaskEntity : PanacheEntity() {
     @Column(name = "due_date")
     lateinit var dueDate: LocalDate
     lateinit var description: String
+
+    override fun toString(): String {
+        return "TaskEntity{id=$id, title=$title, type=$type, dueDate=$dueDate, description=$description}"
+    }
 }
